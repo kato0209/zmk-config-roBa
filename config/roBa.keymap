@@ -88,6 +88,52 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        bspc_hold: bspc_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BSPC_HOLD";
+            #binding-cells = <0>;
+
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+
+            /*
+             * 1回目の tap-dance binding として使う:
+             * hold = layer 1
+             * tap  = BACKSPACE
+             */
+            bindings = <&mo 1>, <&kp BACKSPACE>;
+        };
+
+        bspc_repeat: bspc_repeat {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BSPC_REPEAT";
+            #binding-cells = <0>;
+
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+
+            /*
+             * 2回目:
+             * tap でも hold でも BACKSPACE。
+             * 2回目を押しっぱなしにすると、OS側のキーリピートで連続削除される想定。
+             */
+            bindings = <&kp BACKSPACE>, <&kp BACKSPACE>;
+        };
+
+        bspc_td: bspc_td {
+            compatible = "zmk,behavior-tap-dance";
+            label = "BSPC_TD";
+            #binding-cells = <0>;
+
+            /*
+             * 2タップ判定の猶予。
+             * 速く2回押すなら 180〜220ms、ゆったりなら 250〜300ms。
+             */
+            tapping-term-ms = <220>;
+
+            bindings = <&bspc_hold>, <&bspc_repeat>;
+        };
     };
 
     keymap {
@@ -98,7 +144,7 @@
 &kp Q     &kp W         &kp E      &kp R           &kp T                                                   &kp Y        &kp U  &kp I      &kp O    &kp P
 &kp A     &kp S         &kp D      &kp F           &kp G                 &kp ESC          &kp MINUS        &kp H        &kp J  &kp K      &kp L    &lt 5 SEMICOLON
 &kp Z     &kp X         &kp C      &kp V           &kp B                 &kp TAB          &kp B            &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LGUI  &kp LEFT_ALT  &kp LCTRL  &mt LGUI LANG2  &mt LEFT_SHIFT SPACE  &lt 5 ENTER      &lt 1 BACKSPACE  &lt 2 LANG1                             &screenMacro
+&kp LGUI  &kp LEFT_ALT  &kp LCTRL  &mt LGUI LANG2  &mt LEFT_SHIFT SPACE  &lt 5 ENTER      &bspc_td  &lt 2 LANG1                             &screenMacro
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
