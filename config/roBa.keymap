@@ -13,17 +13,17 @@
 &trackball {
     automouse-layer = <4>;
 
-    // arrows {
-    //     layers = <3>;
-    //     bindings =
-    //         <&kp RIGHT_ARROW>,
-    //         <&kp LEFT_ARROW>,
-    //         <&kp UP_ARROW>,
-    //         <&kp DOWN_ARROW>;
-    //     tick = <10>;
-    //     wait-ms = <5>;
-    //     tap-ms = <5>;
-    // };
+    arrows {
+        layers = <1>;
+        bindings =
+            <&kp LC(LEFT_ARROW)>,
+            <&kp LC(RIGHT_ARROW)>,
+            <&none>,
+            <&none>;
+        tick = <10>;
+        wait-ms = <5>;
+        tap-ms = <5>;
+    };
 };
 
 &trackball_listener {
@@ -124,7 +124,7 @@
         default_layer {
             bindings = <
 &kp Q           &kp W         &kp E      &kp R           &kp T                                             &kp Y        &kp U  &kp I      &kp O    &kp P
-&mt LS(LGUI) A  &kp S         &kp D      &kp F           &kp G                 &kp ESC          &kp MINUS  &kp H        &kp J  &kp K      &kp L    &lt 5 SEMICOLON
+&mt LS(LGUI) A  &kp S         &kp D      &kp F           &kp G                 &kp ESC          &kp MINUS  &kp H        &lt 1 J  &kp K      &kp L    &lt 5 SEMICOLON
 &kp Z           &kp X         &kp C      &kp V           &kp B                 &kp TAB          &kp B      &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &kp LGUI        &kp LEFT_ALT  &kp LCTRL  &mt LGUI LANG2  &mt LEFT_SHIFT SPACE  &lt 5 ENTER      &bspc_td   &lt 2 LANG1                             &screenMacro
             >;
